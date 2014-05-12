@@ -1,4 +1,4 @@
-Name:		%{ext_tag}-1.8.0-oracle
+Name:		%{ext_tag}-%{dirmaj}-oracle
 Version:	%{ext_version}
 Release:	%{ext_release}
 Summary:	Java
@@ -7,23 +7,23 @@ Prefix:         /usr/java
 License:	Oracle Binary Code License
 Group:		Development/Tools
 Source0:	%{ext_source}
-Provides:       jre java %{ext_provides}
+Provides:       jre java %{ext_provides} java-1.7.0-openjdk
 AutoReqProv:    no
 
-%define javahome %{prefix}/8/%{ext_arch}/%{ext_tag}
+%define javahome %{prefix}/%{vermaj}/%{ext_arch}/%{ext_tag}
 %define javabin %{javahome}/bin
 %define javaman %{javahome}/man/man1
 %define rpmjhome $RPM_BUILD_ROOT%{javahome} 
-%define filesspec %{ext_tag}-files.%{ext_arch}.spec
-%define postsh %{ext_tag}.%{ext_arch}.sh
+%define filesspec %{vermaj}-%{ext_tag}-files.%{ext_arch}.spec
+%define postsh %{vermaj}-%{ext_tag}.%{ext_arch}.sh
 
 %description
 
 
 %install
-mkdir -p $RPM_BUILD_ROOT/usr/java/8/%{ext_arch}
-tar -zxf $RPM_SOURCE_DIR/%{ext_source} -C $RPM_BUILD_ROOT/usr/java/8/%{ext_arch}
-mv $RPM_BUILD_ROOT/usr/java/8/%{ext_arch}/%{ext_tag}%{oraver} $RPM_BUILD_ROOT/usr/java/8/%{ext_arch}/%{ext_tag}
+mkdir -p $RPM_BUILD_ROOT/usr/java/%{vermaj}/%{ext_arch}
+tar -zxf $RPM_SOURCE_DIR/%{ext_source} -C $RPM_BUILD_ROOT/usr/java/%{vermaj}/%{ext_arch}
+mv $RPM_BUILD_ROOT/usr/java/%{vermaj}/%{ext_arch}/%{ext_tag}%{oraver} $RPM_BUILD_ROOT/usr/java/%{vermaj}/%{ext_arch}/%{ext_tag}
 cat $RPM_SOURCE_DIR/deployment.properties > $RPM_BUILD_ROOT%{javahome}/lib/deployment.properties
 echo "deployment.system.config.mandatory=false
 deployment.system.config=file:%{javahome}/lib/deployment.properties" > $RPM_BUILD_ROOT%{javahome}/lib/deployment.config
@@ -66,4 +66,7 @@ cat %{postsh}
 %post -f %{postsh} 
 
 %postun
-update-alternatives --remove java %{javabin}/java
+if [ "$1" == "0" ]; then
+  update-alternatives --remove java %{javabin}/java
+fi
+exit 0

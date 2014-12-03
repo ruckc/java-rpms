@@ -1,4 +1,4 @@
-java-8-rpms
+java-rpms
 ===========
 
 Script and rpm spec file to build smart "custom" rpms, to allow automatic upgrades across environment.
@@ -9,4 +9,4 @@ Instructions
 2. Place files in ./original
 3. Ensure ~/rpmbuild is properly setup
 4. run ./build.sh
-5. copy/move ~/rpmbuild/RPMS/*/*.rpm to your yum repository
+5. publish ~/rpmbuild/RPMS/*/*.rpm in your yum repository

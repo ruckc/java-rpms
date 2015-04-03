@@ -4,7 +4,7 @@ EXT_RELEASE=${BUILD_NUMBER-$(date +%s)}
 umask 022
 echo "Release: ${EXT_RELEASE}"
 
-FILES=$(find original -type f -name \*.gz -exec basename {} \;)
+FILES=$(find original/ -type f -name \*.gz -exec basename {} \;)
 echo $FILES
 for GZ in $FILES; do
   EXT_TAG=$(echo $GZ | cut -f 1 -d-)

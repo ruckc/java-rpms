@@ -1,11 +1,12 @@
 #!/bin/bash
-if [ "$PROMOTE" != "y" ]; then
 rm -rf ~/rpmbuild/*/*
-EXT_RELEASE=${BUILDNUMBER-$(date +%s)}
+EXT_RELEASE=${BUILD_NUMBER-$(date +%s)}
 umask 022
 echo "Release: ${EXT_RELEASE}"
 
-for GZ in $(find original -type f -exec basename {} \;); do
+FILES=$(find original -type f -name \*.gz -exec basename {} \;)
+echo $FILES
+for GZ in $FILES; do
   EXT_TAG=$(echo $GZ | cut -f 1 -d-)
   ARCH=$(echo $GZ | grep -oE "(i586|x64)")
   VER=$(echo $GZ | grep -oE "[78]u[0-9][0-9]*"|cut -f 2 -du)
@@ -19,8 +20,10 @@ for GZ in $(find original -type f -exec basename {} \;); do
 
   EXT_PRIORITY="1${VERMAJ}01"
   if [ "${EXT_TAG}" == "jdk" ]; then
-    PROVIDES="java-devel"
-    EXT_PRIORITY=1${VERMAJ}00
+    PROVIDES="jre java java-devel java-1.7.0-openjdk"
+    EXT_PRIORIeY=1${VERMAJ}00
+  else
+    PROVIDES="jre java java-1.7.0-openjdk"
   fi
 
   case $ARCH in
@@ -44,11 +47,11 @@ for GZ in $(find original -type f -exec basename {} \;); do
     /usr/lib/rpm/redhat/brp-strip-shared %{__strip} \
     /usr/lib/rpm/redhat/brp-strip-static-archive %{__strip} \
     /usr/lib/rpm/redhat/brp-strip-comment-note %{__strip} %{__objdump} \
-%{nil}' java.spec &
-done | cat
-elif [ "$PROMOTE" == "y" ]; then
-find ~/rpmbuild/RPMS -type f -exec sudo mv -v {} /opt/rpm \;
-cd /opt/rpm
-sudo createrepo .
-sudo yum clean all --disablerepo='*' --enablerepo=local
-fi
+%{nil}' java.spec
+done
+#elif [ "$PROMOTE" == "y" ]; then
+#find ~/rpmbuild/RPMS -type f -exec sudo mv -v {} /opt/rpm \;
+#cd /opt/rpm
+#sudo createrepo .
+#sudo yum clean all --disablerepo='*' --enablerepo=local
+#fi

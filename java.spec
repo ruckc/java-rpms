@@ -48,18 +48,18 @@ done >> %{filesspec}
 find %{rpmjhome} -type l | sed "s|$RPM_BUILD_ROOT||" >> %{filesspec}
 
 # BUILD update-alternatives script
-echo "update-alternatives \\ " > %{postsh}
-echo "--install %{_bindir}/java java %{javabin}/java %{priority} \\ " >> %{postsh}
+echo -n "update-alternatives " > %{postsh}
+echo -n "--install %{_bindir}/java java %{javabin}/java %{priority} " >> %{postsh}
 for F in $(find %{rpmjhome}/bin -type f | sed "s|$RPM_BUILD_ROOT||"); do
   bn=$(basename $F)
-  echo "--slave %{_bindir}/$bn $bn %{javabin}/$bn \\ " >> %{postsh}
+  echo -n "--slave %{_bindir}/$bn $bn %{javabin}/$bn " >> %{postsh}
 done
 for F in $(find %{rpmjhome}/man/man1 -type f | sed "s|$RPM_BUILD_ROOT||"); do
   bn=$(basename $F)
-  echo "--slave %{_mandir}/man1/$bn $bn %{javaman}/$bn \\ " >> %{postsh}
+  echo -n "--slave %{_mandir}/man1/$bn $bn %{javaman}/$bn " >> %{postsh}
 done
-echo "" >> %{postsh}
-
+echo >> %{postsh}
+cat %{postsh}
 %files -f %{filesspec}
 
 %post -f %{postsh} 

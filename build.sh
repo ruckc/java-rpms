@@ -23,7 +23,7 @@ for GZ in $FILES; do
     PROVIDES="jre java java-devel java-1.7.0-openjdk"
     EXT_PRIORIeY=1${VERMAJ}00
   else
-    PROVIDES="jre java java-1.7.0-openjdk"
+    PROVIDES="jre java java-1.7.0-openjdk java-gcj-compat"
   fi
 
   case $ARCH in

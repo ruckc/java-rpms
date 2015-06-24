@@ -20,10 +20,10 @@ for GZ in $FILES; do
 
   EXT_PRIORITY="1${VERMAJ}01"
   if [ "${EXT_TAG}" == "jdk" ]; then
-    PROVIDES="jre java java-devel java-1.7.0-openjdk"
+    PROVIDES="jre java java-devel java-1.7.0-openjdk java-1.8.0-openjdk-headless"
     EXT_PRIORIeY=1${VERMAJ}00
   else
-    PROVIDES="jre java java-1.7.0-openjdk java-gcj-compat"
+    PROVIDES="jre java java-1.7.0-openjdk java-gcj-compat java-1.8.0-openjdk-headless"
   fi
 
   case $ARCH in

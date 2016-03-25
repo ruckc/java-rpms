@@ -20,10 +20,10 @@ for GZ in $FILES; do
 
   EXT_PRIORITY="1${VERMAJ}01"
   if [ "${EXT_TAG}" == "jdk" ]; then
-    PROVIDES="jre java java-devel java-1.7.0-openjdk libawt_xawt.so()(64bit) libawt_xawt.so(SUNWprivate_1.1)(64bit) libjawt.so()(64bit) libjawt.so(SUNWprivate_1.1)(64bit) libjsoundalsa.so()(64bit) libjsoundalsa.so(SUNWprivate_1.1)(64bit) libsplashscreen.so()(64bit) libsplashscreen.so(SUNWprivate_1.1)(64bit) libjvm.so()(64bit) libjvm.so(SUNWprivate_1.1)(64bit) jre-headless"
+    PROVIDES="jre java java-devel java-1.7.0-openjdk libawt_xawt.so()(64bit) libawt_xawt.so(SUNWprivate_1.1)(64bit) libjawt.so()(64bit) libjawt.so(SUNWprivate_1.1)(64bit) libjsoundalsa.so()(64bit) libjsoundalsa.so(SUNWprivate_1.1)(64bit) libsplashscreen.so()(64bit) libsplashscreen.so(SUNWprivate_1.1)(64bit) libjvm.so()(64bit) libjvm.so(SUNWprivate_1.1)(64bit) jre-headless java-1.8.0-openjdk-headless"
     EXT_PRIORITY=1${VERMAJ}00
   else
-    PROVIDES="jre java java-1.7.0-openjdk libawt_xawt.so()(64bit) libawt_xawt.so(SUNWprivate_1.1)(64bit) libjawt.so()(64bit) libjawt.so(SUNWprivate_1.1)(64bit) libjsoundalsa.so()(64bit) libjsoundalsa.so(SUNWprivate_1.1)(64bit) libsplashscreen.so()(64bit) libsplashscreen.so(SUNWprivate_1.1)(64bit) libjvm.so()(64bit) libjvm.so(SUNWprivate_1.1)(64bit) jre-headless"
+    PROVIDES="jre java java-1.7.0-openjdk libawt_xawt.so()(64bit) libawt_xawt.so(SUNWprivate_1.1)(64bit) libjawt.so()(64bit) libjawt.so(SUNWprivate_1.1)(64bit) libjsoundalsa.so()(64bit) libjsoundalsa.so(SUNWprivate_1.1)(64bit) libsplashscreen.so()(64bit) libsplashscreen.so(SUNWprivate_1.1)(64bit) libjvm.so()(64bit) libjvm.so(SUNWprivate_1.1)(64bit) jre-headless java-1.8.0-openjdk-headless"
   fi
 
   case $ARCH in

@@ -20,10 +20,10 @@ for GZ in $FILES; do
 
   EXT_PRIORITY="1${VERMAJ}01"
   if [ "${EXT_TAG}" == "jdk" ]; then
-    PROVIDES="jre java java-devel java-1.7.0-openjdk java-1.8.0-openjdk-headless"
-    EXT_PRIORIeY=1${VERMAJ}00
+    PROVIDES="jre java java-devel java-1.7.0-openjdk libawt_xawt.so()(64bit) libawt_xawt.so(SUNWprivate_1.1)(64bit) libjawt.so()(64bit) libjawt.so(SUNWprivate_1.1)(64bit) libjsoundalsa.so()(64bit) libjsoundalsa.so(SUNWprivate_1.1)(64bit) libsplashscreen.so()(64bit) libsplashscreen.so(SUNWprivate_1.1)(64bit) libjvm.so()(64bit) libjvm.so(SUNWprivate_1.1)(64bit) jre-headless"
+    EXT_PRIORITY=1${VERMAJ}00
   else
-    PROVIDES="jre java java-1.7.0-openjdk java-gcj-compat java-1.8.0-openjdk-headless"
+    PROVIDES="jre java java-1.7.0-openjdk libawt_xawt.so()(64bit) libawt_xawt.so(SUNWprivate_1.1)(64bit) libjawt.so()(64bit) libjawt.so(SUNWprivate_1.1)(64bit) libjsoundalsa.so()(64bit) libjsoundalsa.so(SUNWprivate_1.1)(64bit) libsplashscreen.so()(64bit) libsplashscreen.so(SUNWprivate_1.1)(64bit) libjvm.so()(64bit) libjvm.so(SUNWprivate_1.1)(64bit) jre-headless"
   fi
 
   case $ARCH in
@@ -38,6 +38,7 @@ for GZ in $FILES; do
   export EXT_SOURCE=$GZ
   export EXT_VERSION="${DIRMAJ}.${VER}"
   echo "$GZ -> $EXT_ARCH,$EXT_VERSION,$VERMAJ,$DIRMAJ,$VER,$ARCH"
+  cp -v deployment.config ~/rpmbuild/SOURCES
   cp -v deployment.properties ~/rpmbuild/SOURCES
   cp -v original/$GZ ~/rpmbuild/SOURCES
 
